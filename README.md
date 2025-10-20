@@ -16,7 +16,7 @@ Thx to [joeydee1986](https://github.com/joeydee1986)!
 ## ⬇️ Download and install
 
 Download the latest version here:  
-[**Download Component Language Pack**](https://github.com/ExoAE/ScCompLangPack/archive/refs/heads/main.zip)
+[**Download Component Language Pack**](https://github.com/ExoAE/ScCompLangPack/releases/download/Release/ScCompLangPack-main.zip)
 
 🔧 How to Install:
 
