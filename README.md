@@ -6,6 +6,13 @@ For example:
 
 `XL-1` → `XL-1 S2 Military A`
 
+---
+[Alternate Version](https://github.com/joeydee1986/ScCompLangPackRemix):
+
+`XL-1` → `M2A XL-1`
+
+Thx to [joeydee1986](https://github.com/joeydee1986)!
+
 ## ⬇️ Download and install
 
 Download the latest version here:  
