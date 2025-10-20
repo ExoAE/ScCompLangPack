@@ -4,7 +4,7 @@ This language pack modifies component names to make it easier to detect and trac
 
 For example:
 
-`XL-1` → `XL-1 S2 Military A`
+`XL-1` → `XL-1 Military A`
 
 ---
 [Alternate Version](https://github.com/joeydee1986/ScCompLangPackRemix):
