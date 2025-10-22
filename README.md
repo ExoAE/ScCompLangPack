@@ -34,6 +34,7 @@ Feel free to open an issue or submit a pull request!
 ## Notes
 
 - This project is not affiliated with Cloud Imperium Games.
+- If you want to implement this in your own language pack, feel free to use the changes from the "modified_global.ini".
 - Using language packs is currently intended by Cloud Imperium Games. 
 https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/star-citizen-community-localization-update
 
