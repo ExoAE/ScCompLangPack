@@ -18,15 +18,15 @@ Additional changes from [StarStrings](https://github.com/MrKraken/StarStrings) P
 - Type notation prefix for missiles (Thanks to WhisperDark in Discord for suggestion)
   - Eg. `Dominator II Missile` -> `[EM] Dominator II Missile`
 
->[!NOTE]
->kindly provided by [MrKraken](https://github.com/MrKraken) 
+kindly provided by [MrKraken](https://github.com/MrKraken) ♥️
 
 - Hephaestanite shortened to Heph [#12](https://github.com/ExoAE/ScCompLangPack/issues/12)
 - Instability:/Resistance: shortened to Instab.:/Resist.: due to overlapping issues
 - Added [BP] also when you get Rewarded with a specific Blueprint
 
 >[!NOTE]
->Which pack should i use? [ScCompLangPack/[Remix](https://github.com/BeltaKoda/ScCompLangPackRemix)/[Remix2](https://github.com/ExoAE/ScCompLangPack/releases)/[StarStrings](https://github.com/MrKraken/StarStrings)]
+>Which pack should i use? [[ScCompLangPack](https://github.com/ExoAE/ScCompLangPack/releases) / [Remix](https://github.com/BeltaKoda/ScCompLangPackRemix) / [Remix2](https://github.com/ExoAE/ScCompLangPack/releases) / [StarStrings](https://github.com/MrKraken/StarStrings)]
+>
 >Basically, all the packs have the same QoL changes, they only differ in component naming. So i suggest choosing the preffered component naming.
 
 ---
@@ -43,8 +43,20 @@ Download the latest version here:
 3. Copy the `data` folder and the (`user.cfg`) file into your game’s LIVE folder root.
 4. Launch the game.
 
-If you have the [SC Launch Configurator](https://www.luftwerft.com/?lang=en) you can just paste this link in the english language config
-`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPack/data/Localization/english/global.ini`
+>[!NOTE]
+>If you have the [SC Launch Configurator](https://www.luftwerft.com/?lang=en) you can just paste one of the links in the english language config
+>
+>ScCompLangPack
+>
+>`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPack/data/Localization/english/global.ini`
+>
+>ScCompLangPackRemix
+>
+>`https://raw.githubusercontent.com/BeltaKoda/ScCompLangPackRemix/refs/heads/main/LIVE/data/Localization/english/global.ini`
+>
+>ScCompLangPackRemix2
+>
+>`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPackRemix2/data/Localization/english/global.ini`
 
 ---
 ## ⚙️ScCompLangPackRemix [here](https://github.com/BeltaKoda/ScCompLangPackRemix)
