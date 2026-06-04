@@ -90,12 +90,16 @@ https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/star-cit
 
 ## ☕ Support and additional info
 
-If you’d like to support me, you can use my Star Citizen referral code when when buying the game:
+Since I am no longer really actively developing myself—as Mr. Kraken does most of the work, he should receive the support.
 
-STAR-4JD7-RZT4
-
-Or here:
-
-[☕ Ko-fi](https://ko-fi.com/exoae)
+<div id="badges">
+  <a href="https://www.youtube.com/@Mrkraken">
+    <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
+  </a>
+  <a href="https://x.com/RealMrKraken">
+    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
+  </a>
+  <a href="https://ko-fi.com/realmrkraken"><img src="https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white&style=for-the-badge"></a>
+</div>
 
 Thank you for using my pack!
