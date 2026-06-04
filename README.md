@@ -24,11 +24,6 @@ kindly provided by [MrKraken](https://github.com/MrKraken) ♥️
 - Instability:/Resistance: shortened to Instab.:/Resist.: due to overlapping issues
 - Added [BP] also when you get Rewarded with a specific Blueprint
 
->[!NOTE]
->Which pack should i use? [[ScCompLangPack](https://github.com/ExoAE/ScCompLangPack/releases) / [Remix](https://github.com/BeltaKoda/ScCompLangPackRemix) / [Remix2](https://github.com/ExoAE/ScCompLangPack/releases) / [StarStrings](https://github.com/MrKraken/StarStrings)]
->
->Basically, all the packs have the same QoL changes, they only differ in component naming. So i suggest choosing the preffered component naming.
-
 ---
 
 ## ⬇️ Download and install
@@ -42,6 +37,7 @@ Download the latest version here:
 2. If you already have a `user.cfg` file, **do not overwrite** it. Instead, open your existing user.cfg and add the following line at the end `g_language = english`.
 3. Copy the `data` folder and the (`user.cfg`) file into your game’s LIVE folder root.
 4. Launch the game.
+
 
 >[!NOTE]
 >If you have the [SC Launch Configurator](https://www.luftwerft.com/?lang=en) you can just paste one of the links in the english language config
@@ -75,6 +71,13 @@ Idea by [andydsm](https://www.reddit.com/user/andydsm/)
 
 ---
 
+>[!NOTE]
+>Which pack should i use? [[ScCompLangPack](https://github.com/ExoAE/ScCompLangPack/releases) / [Remix](https://github.com/BeltaKoda/ScCompLangPackRemix) / [Remix2](https://github.com/ExoAE/ScCompLangPack/releases) / [StarStrings](https://github.com/MrKraken/StarStrings)]
+>
+>Basically, all the packs have the same QoL changes, they only differ in component naming. So i suggest choosing the preffered component naming.
+
+---
+
 ## 🚧 Contribute or Bugs
 
 Found a bug or have an idea for improvement?
@@ -90,8 +93,9 @@ https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/star-cit
 
 ## ☕ Support and additional info
 
-Since I am no longer really actively developing myself—as Mr. Kraken does most of the work, he should receive the support.
+Since I am no longer really actively developing myself, as MrKraken does most of the work, he should receive the support.
 
+MrKraken's Social Links:
 <div id="badges">
   <a href="https://www.youtube.com/@Mrkraken">
     <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
