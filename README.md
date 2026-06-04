@@ -90,8 +90,9 @@ https://robertsspaceindustries.com/spectrum/community/SC/forum/1/thread/star-cit
 
 ## ☕ Support and additional info
 
-Since I am no longer really actively developing myself—as Mr. Kraken does most of the work, he should receive the support.
+Since I am no longer really actively developing myself, as MrKraken does most of the work, he should receive the support.
 
+MrKraken's Social Links:
 <div id="badges">
   <a href="https://www.youtube.com/@Mrkraken">
     <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
