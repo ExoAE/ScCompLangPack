@@ -43,20 +43,6 @@ Download the latest version here:
 3. Copy the `data` folder and the (`user.cfg`) file into your game’s LIVE folder root.
 4. Launch the game.
 
->[!NOTE]
->If you have the [SC Launch Configurator](https://www.luftwerft.com/?lang=en) you can just paste one of the links in the english language config
->
->ScCompLangPack
->
->`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPack/data/Localization/english/global.ini`
->
->ScCompLangPackRemix
->
->`https://raw.githubusercontent.com/BeltaKoda/ScCompLangPackRemix/refs/heads/main/LIVE/data/Localization/english/global.ini`
->
->ScCompLangPackRemix2
->
->`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPackRemix2/data/Localization/english/global.ini`
 
 ---
 ## ⚙️ScCompLangPackRemix [here](https://github.com/BeltaKoda/ScCompLangPackRemix)
@@ -72,6 +58,24 @@ Thx to [BeltaKoda](https://github.com/BeltaKoda)!
 (Also includes the blueprints)
 
 Idea by [andydsm](https://www.reddit.com/user/andydsm/)
+
+---
+
+
+>[!NOTE]
+>If you have the [SC Launch Configurator](https://www.luftwerft.com/?lang=en) you can just paste one of the links in the english language config
+>
+>ScCompLangPack
+>
+>`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPack/data/Localization/english/global.ini`
+>
+>ScCompLangPackRemix
+>
+>`https://raw.githubusercontent.com/BeltaKoda/ScCompLangPackRemix/refs/heads/main/LIVE/data/Localization/english/global.ini`
+>
+>ScCompLangPackRemix2
+>
+>`https://raw.githubusercontent.com/ExoAE/ScCompLangPack/refs/heads/main/ScCompLangPackRemix2/data/Localization/english/global.ini`
 
 ---
 
