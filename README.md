@@ -1,4 +1,4 @@
-# ⚙️ Component Language Pack + additions [🚀4.8 OUT🚀]
+# ⚙️ Component Language Pack + additions [🚀4.8.2 OUT🚀]
 
 The default language pack modifies component names to make it easier to detect and track stats.
 
