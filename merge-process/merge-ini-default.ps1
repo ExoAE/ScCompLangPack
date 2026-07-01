@@ -6,7 +6,6 @@ Get-Content .\modified_global.ini | ForEach-Object {
         $replacements[$key] = $value
     }
 }
-
 Get-Content .\global.ini | ForEach-Object {
     if ($_ -match '^(.*?)(=)(.*)$') {
         $key = $matches[1].Trim()
@@ -19,4 +18,4 @@ Get-Content .\global.ini | ForEach-Object {
     } else {
         $_
     }
-} | Set-Content .\global_merged.ini -Encoding UTF8
+} | Set-Content "B:\Games\StarCitizen\ScCompLangPack\ScCompLangPack\data\Localization\english\global_merged.ini" -Encoding UTF8

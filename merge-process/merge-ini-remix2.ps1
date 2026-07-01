@@ -6,7 +6,6 @@ Get-Content .\modified_global_remix2.ini | ForEach-Object {
         $replacements[$key] = $value
     }
 }
-
 Get-Content .\global.ini | ForEach-Object {
     if ($_ -match '^(.*?)(=)(.*)$') {
         $key = $matches[1].Trim()
@@ -19,4 +18,4 @@ Get-Content .\global.ini | ForEach-Object {
     } else {
         $_
     }
-} | Set-Content .\global_merged-remix2.ini -Encoding UTF8
+} | Set-Content "B:\Games\StarCitizen\ScCompLangPack\ScCompLangPackRemix2\data\Localization\english\global_merged-remix2.ini" -Encoding UTF8
