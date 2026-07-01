@@ -19,4 +19,4 @@ Get-Content .\global.ini | ForEach-Object {
     } else {
         $_
     }
-} | Set-Content .\merged-remix2.ini -Encoding UTF8
+} | Set-Content .\global_merged-remix2.ini -Encoding UTF8
