@@ -18,4 +18,4 @@ Get-Content .\global.ini | ForEach-Object {
     } else {
         $_
     }
-} | Set-Content "B:\Games\StarCitizen\ScCompLangPack\ScCompLangPackRemix2\data\Localization\english\global_merged-remix2.ini" -Encoding UTF8
+} | Set-Content "C:\Users\exoae\Documents\GitHub\ScCompLangPack\ScCompLangPackRemix2\data\Localization\english\global_merged-remix2.ini" -Encoding UTF8
