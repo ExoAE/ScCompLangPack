@@ -1,1 +1,4 @@
 *.lnk
+dist/
+__pycache__/
+UPDATE.md
