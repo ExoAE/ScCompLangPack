@@ -1,4 +1,5 @@
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -192,23 +193,94 @@ def run(*cmd):
     print('    $ ' + ' '.join(cmd))
     subprocess.run(cmd, cwd=ROOT, check=True)
 
-def next_tag():
+def next_tag(hotfix=False):
     r = subprocess.run(['git', 'describe', '--tags', '--abbrev=0'], cwd=ROOT, capture_output=True, text=True)
     last = r.stdout.strip()
     if not re.match('v\\d+(\\.\\d+)+$', last):
         sys.exit('No tag like v0.14.3 found - please pass --tag')
     parts = last[1:].split('.')
-    parts[-1] = str(int(parts[-1]) + 1)
+    if hotfix:
+        if len(parts) < 4:
+            parts.append('1')
+        else:
+            parts[-1] = str(int(parts[-1]) + 1)
+    else:
+        parts[-1] = str(int(parts[-1]) + 1)
     return 'v' + '.'.join(parts)
 
-def publish(version, zips, prerelease, tag, notes):
+def verify():
+    print('[4b] Verifying output')
+    src, _ = read_text(MERGE / 'global.ini')
+    src_map = {}
+    for l in src:
+        if '=' in l:
+            k, v = kv(l)
+            src_map[k.strip()] = v
+    for name, p in PACKS.items():
+        out, _ = read_text(ROOT / name / OUT_REL)
+        if len(out) != len(src):
+            sys.exit(f'{name}: line count differs from source ({len(out)} vs {len(src)})')
+        out_map = {}
+        for l in out:
+            if '=' in l:
+                k, v = kv(l)
+                out_map[k.strip()] = v
+        m_lines, _ = read_text(p['modified'])
+        bad = []
+        for l in m_lines:
+            if '=' in l:
+                k, v = kv(l)
+                k = k.strip()
+                if k in src_map and out_map.get(k) != v:
+                    bad.append(k)
+        if bad:
+            sys.exit(f'{name}: {len(bad)} entries differ from modified file, e.g. {bad[:3]}')
+        extra = [k for k in out_map if k in src_map and out_map[k] != src_map[k] and k not in {kv(x)[0].strip() for x in m_lines if '=' in x}]
+        if extra:
+            sys.exit(f'{name}: {len(extra)} unexpected differences from source, e.g. {extra[:3]}')
+    print('    OK')
+
+def current_version():
+    lines, _ = read_text(PACKS['ScCompLangPack']['modified'])
+    for l in lines:
+        m = re.match('Frontend_PU_Version=Alpha (\\S+?):?(\\s|$)', l)
+        if m:
+            return m.group(1).rstrip(':')
+    sys.exit('Frontend_PU_Version not found in modified_global.ini')
+
+def check():
+    req = urllib.request.Request(SRC_URL, headers={'User-Agent': 'ScCompLangPack-updater'})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        data = r.read()
+    if len(data) < 1000000:
+        sys.exit(f'Download too small ({len(data)} bytes) - aborted')
+    new = data.decode('utf-8').lstrip('\ufeff').replace('\r\n', '\n')
+    old = (MERGE / 'global.ini').read_bytes().decode('utf-8').lstrip('\ufeff').replace('\r\n', '\n')
+    version = current_version()
+    if new == old:
+        status = 'unchanged'
+    else:
+        base = None
+        for l in new.split('\n'):
+            if l.startswith('Frontend_PU_Version='):
+                m = re.search('Alpha (\\d+(?:\\.\\d+)*)', l)
+                base = m.group(1) if m else None
+                break
+        status = 'changed' if base and (version == base or version.startswith(base + '.')) else 'newversion'
+    print(f'status={status} version={version}')
+    out = os.environ.get('GITHUB_OUTPUT')
+    if out:
+        with open(out, 'a', encoding='utf-8') as f:
+            f.write(f'status={status}\nversion={version}\n')
+
+def publish(version, zips, prerelease, tag, notes, yes=False):
     title = f'{version} - {tag}'
     notes = notes or (f'{version} PTU\nThis is a PTU Version, expect missing Text' if prerelease else f'{version} release')
     msg = f'{version} [pre release]' if prerelease else f'{version} update'
     print('\n[6] Publishing')
     subprocess.run(['git', 'status', '--short'], cwd=ROOT)
     print(f"    Commit message: {msg}\n    Release:          {title} (Tag {tag}){(' [Pre-release]' if prerelease else '')}\n    Notes:            {notes!r}\n    Assets:           " + ', '.join((z.name for z in zips)))
-    if input('Run commit, push and release now? [y/N] ').strip().lower() not in ('y', 'j'):
+    if not yes and input('Run commit, push and release now? [y/N] ').strip().lower() not in ('y', 'j'):
         print('Aborted - nothing pushed. ZIPs are in dist/.')
         return
     run('git', 'add', '-A')
@@ -222,25 +294,34 @@ def publish(version, zips, prerelease, tag, notes):
 
 def main():
     ap = argparse.ArgumentParser(description='ScCompLangPack update automation')
-    ap.add_argument('version', help='New game version, e.g. 4.10.4')
+    ap.add_argument('version', nargs='?', help='New game version, e.g. 4.10.4')
     ap.add_argument('--subtitle', help="Title suffix, e.g. 'Siege of Orison' (default: from StarStrings)")
     ap.add_argument('--no-download', action='store_true', help='use the existing merge-process/global.ini')
     ap.add_argument('--add-new', action='store_true', help='add new components automatically')
     ap.add_argument('--no-release', action='store_true', help='no commit/push/release')
     ap.add_argument('--prerelease', action='store_true')
+    ap.add_argument('--hotfix', action='store_true', help='default tag: append/increment a 4th number (v0.14.3 -> v0.14.3.1)')
+    ap.add_argument('--yes', action='store_true', help='do not ask before commit/push/release')
+    ap.add_argument('--check', action='store_true', help='only report whether StarStrings changed (unchanged/changed/newversion)')
     ap.add_argument('--tag', help='Release tag, e.g. v0.14.4 (default: last tag + 1)')
     ap.add_argument('--notes', help="Release notes (default: '<version> release' or PTU text)")
     a = ap.parse_args()
+    if a.check:
+        check()
+        return
+    if not a.version:
+        ap.error('version is required')
     if not a.no_download:
         download(MERGE / 'global.ini')
     g_lines, _ = read_text(MERGE / 'global.ini')
-    tag = a.tag or next_tag()
+    tag = a.tag or next_tag(a.hotfix)
     print(f'Pack version/tag: {tag}')
     set_version(a.version, a.subtitle or source_subtitle(g_lines), tag, a.prerelease)
     handle_new(g_lines, a.add_new)
     merge()
+    verify()
     zips = build_zips()
     if not a.no_release:
-        publish(a.version, zips, a.prerelease, tag, a.notes)
+        publish(a.version, zips, a.prerelease, tag, a.notes, a.yes)
 if __name__ == '__main__':
     main()

@@ -1,0 +1,51 @@
+name: Update from StarStrings
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: update-from-starstrings
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check StarStrings
+        id: check
+        run: python3 merge-process/update_pack.py --check
+
+      - name: Open issue for new game version
+        if: steps.check.outputs.status == 'newversion'
+        run: |
+          open=$(gh issue list --state open --search "StarStrings has a new game version in:title" --json number --jq length)
+          if [ "$open" = "0" ]; then
+            gh issue create \
+              --title "StarStrings has a new game version" \
+              --body "The StarStrings global.ini changed and no longer matches the current game version (${{ steps.check.outputs.version }}). Run the update manually: python merge-process/update_pack.py <version> --tag <tag> --add-new"
+          fi
+
+      - name: Update and release
+        if: steps.check.outputs.status == 'changed'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          pre=""
+          if [ "$(gh release list --limit 1 --json isPrerelease --jq '.[0].isPrerelease')" = "true" ]; then
+            pre="--prerelease"
+          fi
+          python3 merge-process/update_pack.py "${{ steps.check.outputs.version }}" \
+            --hotfix --add-new --yes $pre \
+            --notes "Automatic update to the latest StarStrings version"
