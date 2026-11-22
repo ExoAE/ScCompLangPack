@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 concurrency:
   group: update-from-starstrings
@@ -27,25 +26,16 @@ jobs:
         id: check
         run: python3 merge-process/update_pack.py --check
 
-      - name: Open issue for new game version
-        if: steps.check.outputs.status == 'newversion'
-        run: |
-          open=$(gh issue list --state open --search "StarStrings has a new game version in:title" --json number --jq length)
-          if [ "$open" = "0" ]; then
-            gh issue create \
-              --title "StarStrings has a new game version" \
-              --body "The StarStrings global.ini changed and no longer matches the current game version (${{ steps.check.outputs.version }}). Run the update manually: python merge-process/update_pack.py <version> --tag <tag> --add-new"
-          fi
-
-      - name: Update and release
-        if: steps.check.outputs.status == 'changed'
+      - name: Release LIVE build
+        if: steps.check.outputs.live_status != 'unchanged'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          pre=""
-          if [ "$(gh release list --limit 1 --json isPrerelease --jq '.[0].isPrerelease')" = "true" ]; then
-            pre="--prerelease"
-          fi
-          python3 merge-process/update_pack.py "${{ steps.check.outputs.version }}" \
-            --hotfix --add-new --yes $pre \
+          python3 merge-process/update_pack.py "${{ steps.check.outputs.live_version }}" \
+            --add-new --yes \
             --notes "Automatic update to the latest StarStrings version"
+
+      - name: Pre-release PTU build
+        if: steps.check.outputs.ptu_status == 'changed' && steps.check.outputs.ptu_version != ''
+        run: |
+          python3 merge-process/update_pack.py "${{ steps.check.outputs.ptu_version }}" --ptu --add-new
