@@ -214,7 +214,7 @@ def publish(version, zips, prerelease, tag, notes):
     run('git', 'add', '-A')
     run('git', 'commit', '-m', msg)
     run('git', 'push')
-    cmd = ['gh', 'release', 'create', tag, *[str(z) for z in zips], '--title', title, '--notes', notes]
+    cmd = ['gh', 'release', 'create', tag, *[str(z) for z in zips], '--repo', 'ExoAE/ScCompLangPack', '--target', 'main', '--title', title, '--notes', notes]
     if prerelease:
         cmd.append('--prerelease')
     run(*cmd)
